@@ -1,8 +1,12 @@
 <?php
 session_start();
+if (!isset($_SESSION['member_id'])) {
+    header('Location: ../login.php'); 
+}
+
 include_once 'db.php';
 
-$m_id=$_SESSION['user_id'];
+$m_id=$_SESSION['member_id'];
 echo $m_id;
 $result = pg_query($conn, "SELECT * FROM Maintenance WHERE status = 'Pending' and member_id=$m_id");
 $maintenanceRecords = pg_fetch_all($result) ?: [];
@@ -21,6 +25,7 @@ pg_close($conn);
 </head>
 
 <body>
+    <?php require '../_nav.php'; ?>
     <div class="container mt-5">
         <h1 class="text-center">Pay Maintenance Fee</h1>
 

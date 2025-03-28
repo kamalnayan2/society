@@ -55,7 +55,7 @@ $maintenance_id = $_SESSION['maintenance_id'];
                 }
             },
             "theme": {
-                "color": "#22B70BFF"
+                "color": "#F37254"
             }
         };
 

@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database connection parameters
-    include_once './login/database/connet_pg.php';
+    include '../login/database/connet_pg.php';
 
     // Get form data
     $eventName = $_POST['eventName'];

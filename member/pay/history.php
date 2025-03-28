@@ -3,7 +3,7 @@ session_start();
 include_once 'db.php';
 
 // Get the member ID from the session
-$member_id = $_SESSION['user_id']; // Assuming user_id is the member ID
+$member_id = $_SESSION['member_id']; // Assuming member_id is the member ID
 
 // Fetch transaction history for the specific member ID
 $result = pg_query($conn, "SELECT t.order_id, t.payment_id, t.amount, t.status, m.maintenance_name, t.created_at 
@@ -25,11 +25,8 @@ pg_close($conn);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Payment History</title>
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
         .container {
-            margin-top: 50px;
+            margin-top: 100px;
         }
         h1 {
             margin-bottom: 30px;
@@ -40,7 +37,11 @@ pg_close($conn);
     </style>
 </head>
 
-<body>
+<body style="background-color: #BDCE6FFF;">
+<div>
+    <?php require '../_nav.php'; ?>
+</div>    
+
     <div class="container">
         <h1 class="text-center">Payment History</h1>
         <div class="text-center mb-3">
@@ -80,9 +81,6 @@ pg_close($conn);
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="text-center">
-            <a href="index.php" class="btn btn-primary">Back to Home</a>
-        </div>
     </div>
 </body>
 

@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Complaint</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color:   #BDCE6FFF;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -18,7 +24,8 @@
                 <label for="complaindescription">Complaint Description</label>
                 <textarea class="form-control" id="complaindescription" name="complaindescription" rows="4" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit Complaint</button>
+            <button type="submit" class="btn btn-success">Submit Complaint</button>
+            <a href="../member/dashboard.php" class="btn btn-primary">Back to Home</a>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

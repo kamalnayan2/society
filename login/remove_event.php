@@ -1,21 +1,11 @@
 <?php
-include_once "../partials/db_connect.php";
+include "../partials/db_connect.php";
 
-// Get the JSON input
-$data = json_decode(file_get_contents("php://input"), true);
-$id = $data['id'];
-
-// Remove the event
-$sql = "DELETE FROM events WHERE id=$1";
-$result = pg_query_params($conn, $sql, array($id));
-
-$response = [];
-if ($result) {
-    $response['success'] = true;
-} else {
-    $response['success'] = false;
+if (isset($_GET['id'])) {
+    $eventId = intval($_GET['id']);
+    $deleteQuery = "DELETE FROM Events WHERE id = $eventId";
+    pg_query($conn, $deleteQuery);
+    header('Location: home.php'); // Redirect back to the dashboard
+    exit();
 }
-
-pg_close($conn);
-echo json_encode($response);
 ?>

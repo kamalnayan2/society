@@ -32,11 +32,11 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header" style="background-color:#3c944180;color: #092c0a;">
+        <div class="offcanvas-header" style="background-color:#3c944180">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Society</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body" style="background-color:#3c944180;color: #092c0a;">
+        <div class="offcanvas-body" style="background-color:#3c944180">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="../login/request.php"><span class="material-icons">build</span> Maintenance Requests</a>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['member_id'])) {
     header('Location: login.php'); 
     exit();
 }
@@ -15,7 +15,7 @@ if (!$conn) {
     die("Connection failed: " . pg_last_error());
 }
 
-$mid = $_SESSION['user_id'] ?? null; // Ensure mid is set
+$mid = $_SESSION['member_id'] ?? null; // Ensure mid is set
 if ($mid === null) {
     die("User  not logged in.");
 }
@@ -54,9 +54,10 @@ pg_close($conn);
     </style>
 </head>
 
-<body>
+<body style="background-color: #BDCE6FFF;">
 <?php require "_nav.php";?>
-    <div class="container profile-container">
+<br/>
+    <div class="container profile-container mt-6">
         <h1 class="text-center">Member Profile</h1>
         <div class="row">
             <div class="col-md-6">
@@ -73,9 +74,6 @@ pg_close($conn);
         </div>
         <div class="text-center mt-4">
             <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
-        </div>
-        <div class="text-center">
-            <a href="dashboard.php" class="btn btn-primary">Back to Home</a>
         </div>
     </div>
 

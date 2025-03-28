@@ -3,32 +3,34 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
+if (isset($_SESSION['member_id'])) {
+    
+    include 'db_connect.php'; // Ensure this file connects to your database
+    
+    // Fetch member data (example queries)
+    $member_id = $_SESSION['member_id']; // Example member ID
+    
+    // Query to fetch recent maintenance requests
+    $requests_query = "SELECT * FROM requests WHERE member_id = $member_id ";
+    $requests_result = pg_query($conn, $requests_query);
+    
+    // Check for errors in the query
+    if (!$requests_result) {
+        die("Error in SQL query: " . pg_last_error());
+    }
+    
+    // Query to fetch upcoming events
+    $events_query = "SELECT * FROM events WHERE event_date >= CURRENT_DATE ORDER BY event_date ASC";
+    $events_result = pg_query($conn, $events_query);
+    
+    // Check for errors in the events query
+    if (!$events_result) {
+        die("Error in SQL query: " . pg_last_error());
+    }
+}
+else{
     header('Location: login.php'); 
     exit();
-}
-
-include 'db_connect.php'; // Ensure this file connects to your database
-
-// Fetch member data (example queries)
-$member_id = $_SESSION['user_id']; // Example member ID
-
-// Query to fetch recent maintenance requests
-$requests_query = "SELECT * FROM requests WHERE member_id = $member_id ";
-$requests_result = pg_query($conn, $requests_query);
-
-// Check for errors in the query
-if (!$requests_result) {
-    die("Error in SQL query: " . pg_last_error());
-}
-
-// Query to fetch upcoming events
-$events_query = "SELECT * FROM events WHERE event_date >= CURRENT_DATE ORDER BY event_date ASC";
-$events_result = pg_query($conn, $events_query);
-
-// Check for errors in the events query
-if (!$events_result) {
-    die("Error in SQL query: " . pg_last_error());
 }
 ?>
 
@@ -46,9 +48,10 @@ if (!$events_result) {
         .content {
             padding: 20px;
         }
+
     </style>
 </head>
-<body>
+<body style="background-color: #BDCE6FFF;">
     <div>
         <?php require "_nav.php"; ?>
     </div>
@@ -68,12 +71,12 @@ if (!$events_result) {
             <?php 
             if (pg_num_rows($requests_result) > 0) {
                 while ($row = pg_fetch_assoc($requests_result)) { ?>
-                    <li class="list-group-item" style="margin-top: 10px; width:75%;">
+                    <li class="list-group-item" style="margin-top: 10px; width:75%; background-color: #F59801FF; align-self: center;">
                         <?php echo htmlspecialchars($row['description']); ?> - <?php echo htmlspecialchars($row['created_at']); ?>
                     </li>
                 <?php } 
             } else { ?>
-                <li class="list-group-item">No recent maintenance requests found.</li>
+                <li class="list-group-item" style="margin-top: 10px; width:80%; background-color: #F59801FF; align-self: center;">No recent maintenance requests found.</li>
             <?php } ?>
         </ul>
     </div>
@@ -83,8 +86,8 @@ if (!$events_result) {
                 <div class="row">
                     <?php if ($events_result && pg_num_rows($events_result) > 0): ?>
                         <?php while ($event = pg_fetch_assoc($events_result)): ?>
-                            <div class="row-lg" style="margin-top: 30px;">
-                                <div class="card event-card">
+                            <div class="row-lg" style="margin-top: 30px;" >
+                                <div class="card event-card" style="background-color: #E57E34ED;">
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo htmlspecialchars($event['event_name']); ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted center">

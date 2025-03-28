@@ -87,3 +87,10 @@ Array
     [amount] => 50000
     [maintenance_id] => 14
 )
+Array
+(
+    [order_id] => order_PwSbIVw3Kp1Gt3
+    [payment_id] => pay_PwSd1poKvjy7nx
+    [amount] => 70000
+    [maintenance_id] => 16
+)

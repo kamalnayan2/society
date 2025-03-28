@@ -1,6 +1,6 @@
 <?php
-include "../login/database/connet_pg.php";
 session_start();
+include_once "../login/database/connet_pg.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mobile = $_POST['mob'];
@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     error_log("Password: " . $password); // Log the password (consider removing this in production)
 
     // Prepare the SQL statement
-    $query = "SELECT * FROM member WHERE mobileno = $1";
+    $query = "SELECT * FROM member WHERE mobileno = $1 and password=$2";
     $result = pg_prepare($conn, "my_query", $query);
-    $result = pg_execute($conn, "my_query", array($mobile));
+    $result = pg_execute($conn, "my_query", array($mobile,$password));
 
     if (!$result) {
         error_log("Query failed: " . pg_last_error($conn)); // Debugging statement
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // If the password is hashed, use password_verify() instead
         if ($arr['password'] === $password) {
             // Set session variables
-            $_SESSION['user_id'] = $arr['memberid']; // Assuming 'memberid' is the primary key
+            $_SESSION['member_id'] = $arr['memberid']; // Assuming 'memberid' is the primary key
             header("Location: dashboard.php"); // Redirect to home page
             exit();
         } else {

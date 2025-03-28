@@ -21,7 +21,7 @@ $maintenance_id = $_SESSION['maintenance_id'];
 <body>
     <script>
         var options = {
-            "key": "rzp_test_5DRM9K9ZYvhm14", // Enter the Key ID generated from the Dashboard
+            "key": "rzp_test_nG6hRXPQ1pJ9wE", // Enter the Key ID generated from the Dashboard
             "amount": <?= $amount ?>, // Amount is in currency subunits. Default is in paise.
             "currency": "INR",
             "name": "SOCIETY",
